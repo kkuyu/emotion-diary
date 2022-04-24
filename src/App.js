@@ -8,6 +8,39 @@ import New from "./pages/New";
 import Edit from "./pages/Edit";
 import Diary from "./pages/Diary";
 
+const dummyData = [
+  {
+    id: 0,
+    emotion: 1,
+    content: "220422 Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+    date: 1650585600000,
+  },
+  {
+    id: 1,
+    emotion: 2,
+    content: "220423 Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+    date: 1650672000000,
+  },
+  {
+    id: 2,
+    emotion: 3,
+    content: "220424 Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+    date: 1650758400000,
+  },
+  {
+    id: 3,
+    emotion: 4,
+    content: "220425 Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+    date: 1650844800000,
+  },
+  {
+    id: 4,
+    emotion: 5,
+    content: "220426 Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+    date: 1650931200000,
+  },
+];
+
 const reducer = (state, action) => {
   let newState = [];
   switch (action.type) {
@@ -40,7 +73,7 @@ export const DiaryStateContext = React.createContext();
 export const DiaryDispatchContext = React.createContext();
 
 function App() {
-  const [data, dispatch] = useReducer(reducer, []);
+  const [data, dispatch] = useReducer(reducer, [...dummyData]);
 
   const dataId = useRef(0);
 
@@ -80,7 +113,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/new" element={<New />} />
-              <Route path="/edit" element={<Edit />} />
+              <Route path="/edit/:id" element={<Edit />} />
               <Route path="/diary/:id" element={<Diary />} />
             </Routes>
           </div>
