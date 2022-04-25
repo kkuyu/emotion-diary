@@ -8,39 +8,6 @@ import New from "./pages/New";
 import Edit from "./pages/Edit";
 import Diary from "./pages/Diary";
 
-const dummyData = [
-  {
-    id: 0,
-    emotion: 1,
-    content: "220422 Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-    date: 1650585600000,
-  },
-  {
-    id: 1,
-    emotion: 2,
-    content: "220423 Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-    date: 1650672000000,
-  },
-  {
-    id: 2,
-    emotion: 3,
-    content: "220424 Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-    date: 1650758400000,
-  },
-  {
-    id: 3,
-    emotion: 4,
-    content: "220425 Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-    date: 1650844800000,
-  },
-  {
-    id: 4,
-    emotion: 5,
-    content: "220426 Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-    date: 1650931200000,
-  },
-];
-
 const reducer = (state, action) => {
   let newState = [];
   switch (action.type) {
@@ -73,7 +40,7 @@ export const DiaryStateContext = React.createContext();
 export const DiaryDispatchContext = React.createContext();
 
 function App() {
-  const [data, dispatch] = useReducer(reducer, [...dummyData]);
+  const [data, dispatch] = useReducer(reducer, []);
 
   const dataId = useRef(0);
 
@@ -81,7 +48,7 @@ function App() {
     dispatch({
       type: "CREATE",
       data: {
-        id: dataId.current,
+        id: dataId.current++,
         content,
         emotion,
         date: new Date(date).getTime(),
@@ -107,7 +74,7 @@ function App() {
 
   return (
     <DiaryStateContext.Provider value={data}>
-      <DiaryDispatchContext.Provider value={(onCreate, onRemove, onEdit)}>
+      <DiaryDispatchContext.Provider value={{ onCreate, onRemove, onEdit }}>
         <BrowserRouter>
           <div className="App">
             <Routes>
