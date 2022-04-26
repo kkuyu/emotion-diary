@@ -18,7 +18,7 @@ const Home = () => {
     }
 
     const minDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getTime();
-    const maxDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getTime();
+    const maxDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0, 23, 59, 59).getTime();
 
     setData(
       diaryList.filter((item) => {
