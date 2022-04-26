@@ -1,29 +1,40 @@
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+
+import { DiaryStateContext } from "../App";
+import DiaryEditor from "../components/DiaryEditor";
+import MyButton from "../components/MyButton";
+import MyHeader from "../components/MyHeader";
 
 const Edit = () => {
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const goBack = () => navigate(-1);
 
-  const test = searchParams.get("test");
-  console.log("test:", test);
+  const { id } = useParams();
+  const diaryList = useContext(DiaryStateContext);
+
+  const [originData, setOriginDate] = useState();
+
+  useEffect(() => {
+    if (!diaryList.length) {
+      return;
+    }
+
+    const targetData = diaryList.find((item) => {
+      return parseInt(item.id) === parseInt(id);
+    });
+    if (targetData) {
+      setOriginDate({ ...targetData });
+    } else {
+      navigate("/", { replace: true });
+    }
+  }, [id, diaryList]);
 
   return (
-    <div>
-      <h1>Edit</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam nam quos rerum atque consequatur eligendi commodi. Quaerat praesentium numquam odit deserunt nihil asperiores quae.
-        Perspiciatis dolor similique nam autem commodi.
-      </p>
-      <button type="button" onClick={() => setSearchParams({ foo: "lorem" })}>
-        change
-      </button>
-      <button type="button" onClick={() => navigate("/new")}>
-        go to new
-      </button>
-      <button type="button" onClick={() => navigate(-1)}>
-        go back
-      </button>
-    </div>
+    <>
+      <MyHeader headText={"일기 수정"} leftChild={<MyButton text={"뒤로가기"} isHidden={true} customClass={"headerLeft"} onClick={goBack} />} />
+      {originData && <DiaryEditor isEdit={true} originData={originData} />}
+    </>
   );
 };
 
