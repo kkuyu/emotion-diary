@@ -151,7 +151,10 @@ header .head_btn_right {
   justify-content: end;
 }
 
-header button {
+header .MyButton {
+  padding-top: 7px;
+  padding-bottom: 7px;
+  font-size: 15px;
 }
 
 /* DiaryList */
@@ -367,25 +370,24 @@ header button {
 /* Diary */
 
 .DiaryPage {
+  margin-top: 30px;
 }
 
 .DiaryPage section {
   width: 100%;
   margin-bottom: 100px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
 }
 
 .DiaryPage h4 {
+  margin: 20px 0;
   font-size: 18px;
   font-weight: bold;
+  text-align: center;
 }
 
 .DiaryPage .diary_img_wrapper {
   background-color: #ececec;
+  margin: 0 auto;
   width: 250px;
   height: 250px;
   border-radius: 5px;
@@ -412,7 +414,7 @@ header button {
 }
 
 .DiaryPage .emotion_descript {
-  font-size: 25px;
+  font-size: 18px;
   color: white;
 }
 

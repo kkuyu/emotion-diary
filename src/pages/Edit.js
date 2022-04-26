@@ -17,6 +17,7 @@ const Edit = () => {
 
   useEffect(() => {
     if (!diaryList.length) {
+      navigate("/", { replace: true });
       return;
     }
 
@@ -31,10 +32,10 @@ const Edit = () => {
   }, [id, diaryList]);
 
   return (
-    <>
+    <div>
       <MyHeader headText={"일기 수정"} leftChild={<MyButton text={"뒤로가기"} isHidden={true} customClass={"headerLeft"} onClick={goBack} />} />
       {originData && <DiaryEditor isEdit={true} originData={originData} />}
-    </>
+    </div>
   );
 };
 
