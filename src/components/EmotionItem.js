@@ -1,3 +1,5 @@
+import React from "react";
+
 const EmotionItem = ({ id, src, text, isSelected, onClick }) => {
   return (
     <button type="button" onClick={() => onClick(id)} className={["EmotionItem", isSelected ? `EmotionItem_on_${id}` : "EmotionItem_off"].join(" ")}>
@@ -7,4 +9,4 @@ const EmotionItem = ({ id, src, text, isSelected, onClick }) => {
   );
 };
 
-export default EmotionItem;
+export default React.memo(EmotionItem);

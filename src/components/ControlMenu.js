@@ -1,4 +1,6 @@
-const ControlMenu = ({ value, optionList, onChange }) => {
+import React from "react";
+
+const ControlMenu = React.memo(({ value, optionList, onChange }) => {
   return (
     <>
       <select value={value} onChange={(e) => onChange(e.target.value)} className="ControlMenu">
@@ -12,7 +14,7 @@ const ControlMenu = ({ value, optionList, onChange }) => {
       </select>
     </>
   );
-};
+});
 
 ControlMenu.defaultProps = {
   value: "value1",

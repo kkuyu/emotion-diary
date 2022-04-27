@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { getStringDate } from "../util/date";
@@ -37,9 +37,9 @@ const DiaryEditor = ({ isEdit, originData }) => {
     }
   };
 
-  const handleClickEmotion = (targetId) => {
+  const handleClickEmotion = useCallback((targetId) => {
     setEmotion(targetId);
-  };
+  }, []);
 
   useEffect(() => {
     if (isEdit) {
