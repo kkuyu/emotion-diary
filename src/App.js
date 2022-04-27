@@ -1,4 +1,4 @@
-import React, { useReducer, useRef } from "react";
+import React, { useEffect, useReducer, useRef } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./App.css";
@@ -12,8 +12,7 @@ const reducer = (state, action) => {
   let newState = [];
   switch (action.type) {
     case "INIT": {
-      newState = [action.data];
-      break;
+      return [...action.data];
     }
     case "CREATE": {
       newState = [action.data, ...state];
@@ -33,6 +32,7 @@ const reducer = (state, action) => {
       return state;
     }
   }
+  localStorage.setItem("diary", JSON.stringify(newState));
   return newState;
 };
 
@@ -71,6 +71,15 @@ function App() {
       },
     });
   };
+
+  useEffect(() => {
+    const localData = localStorage.getItem("diary");
+    if (localData) {
+      const localList = JSON.parse(localData).sort((a, b) => parseInt(b.id) - parseInt(a.id));
+      dataId.current = parseInt(localList[0].id + 1);
+      dispatch({ type: "INIT", data: localList });
+    }
+  }, []);
 
   return (
     <DiaryStateContext.Provider value={data}>

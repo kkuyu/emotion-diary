@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { DiaryStateContext } from "../App";
+import { DiaryDispatchContext, DiaryStateContext } from "../App";
 import DiaryEditor from "../components/DiaryEditor";
 import MyButton from "../components/MyButton";
 import MyHeader from "../components/MyHeader";
@@ -12,8 +12,16 @@ const Edit = () => {
 
   const { id } = useParams();
   const diaryList = useContext(DiaryStateContext);
+  const { onRemove } = useContext(DiaryDispatchContext);
 
   const [originData, setOriginDate] = useState();
+
+  const handleRemove = () => {
+    if (window.confirm("일기를 삭제하시겠습니까?")) {
+      onRemove(originData.id);
+      navigate("/", { replace: true });
+    }
+  };
 
   useEffect(() => {
     if (!diaryList.length) {
@@ -33,7 +41,11 @@ const Edit = () => {
 
   return (
     <div>
-      <MyHeader headText={"일기 수정"} leftChild={<MyButton text={"뒤로가기"} isHidden={true} customClass={"headerLeft"} onClick={goBack} />} />
+      <MyHeader
+        headText={"일기 수정"}
+        leftChild={<MyButton text={"뒤로가기"} isHidden={true} customClass={"headerLeft"} onClick={goBack} />}
+        rightChild={<MyButton text={"삭제"} status={"negative"} onClick={handleRemove} />}
+      />
       {originData && <DiaryEditor isEdit={true} originData={originData} />}
     </div>
   );
