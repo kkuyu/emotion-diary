@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "site": "emotion-diary-kkuyu",
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
