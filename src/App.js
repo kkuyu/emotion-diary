@@ -75,7 +75,10 @@ function App() {
   useEffect(() => {
     const localData = localStorage.getItem("diary");
     if (localData) {
-      const localList = JSON.parse(localData).sort((a, b) => parseInt(b.id) - parseInt(a.id));
+      const localList = JSON.parse(localData);
+      if (!localList.length) return;
+
+      localList.sort((a, b) => parseInt(b.id) - parseInt(a.id));
       dataId.current = parseInt(localList[0].id + 1);
       dispatch({ type: "INIT", data: localList });
     }

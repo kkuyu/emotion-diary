@@ -24,6 +24,11 @@ const Edit = () => {
   };
 
   useEffect(() => {
+    const titleEl = document.getElementsByTagName("title")[0];
+    titleEl.innerHTML = "감정 일기장 - 수정";
+  });
+
+  useEffect(() => {
     if (!diaryList.length) {
       navigate("/", { replace: true });
       return;

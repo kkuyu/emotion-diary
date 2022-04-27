@@ -21,6 +21,11 @@ const Diary = () => {
   const [emotion, setEmotion] = useState(emotionList[2]);
 
   useEffect(() => {
+    const titleEl = document.getElementsByTagName("title")[0];
+    titleEl.innerHTML = "감정 일기장 - 상세";
+  });
+
+  useEffect(() => {
     if (!diaryList.length) {
       navigate("/", { replace: true });
       return;
